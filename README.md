@@ -1,4 +1,4 @@
-### InvestAcademy
+# InvestAcademy
 
 - Stock Trading Educational Platform
   - 1st Mode: Training (Fixed-stock trajectories)
