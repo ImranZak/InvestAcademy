@@ -18,10 +18,10 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/populate')
+@app.route('/test')
 def populate():
     # Unsure of how to implement base url so I am setting it manually here
-    url = 'http://127.0.0.1:5000/users'
+    url = 'http://localhost:5000/users'
 
     # Get all user ids
     response = requests.get(url)
