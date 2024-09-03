@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Landing.css';
+import { Container, Typography, Button, Box } from '@mui/material';
 
 const Landing = () => {
   const [section, setSection] = useState(1);
@@ -9,45 +9,51 @@ const Landing = () => {
   };
 
   return (
-    <div className="landing-container">
+    <Container sx={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'center' }}>
       {section === 1 && (
-        <div className="section">
-          <h1>Invest Academy</h1>
-          <button className="cta-button" onClick={() => handleNextSection(2)}>
+        <Box>
+          <Typography variant="h2" gutterBottom>
+            Invest Academy
+          </Typography>
+          <Button variant="contained" size="large" onClick={() => handleNextSection(2)}>
             Get Started
-          </button>
-        </div>
+          </Button>
+        </Box>
       )}
       {section === 2 && (
-        <div className="section">
-          <h2>Are you new to investing?</h2>
-          <div className="button-container">
-            <button className="cta-button" onClick={() => window.location.href = '/learning-mode'}>
+        <Box>
+          <Typography variant="h4" gutterBottom>
+            Are you new to investing?
+          </Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
+            <Button variant="contained" size="large" onClick={() => window.location.href = '/learning-mode'}>
               Yes, I’d like to learn the basics
-            </button>
-            <button className="cta-button" onClick={() => handleNextSection(3)}>
+            </Button>
+            <Button variant="contained" size="large" onClick={() => handleNextSection(3)}>
               No, I know the basic concepts
-            </button>
-          </div>
-        </div>
+            </Button>
+          </Box>
+        </Box>
       )}
       {section === 3 && (
-        <div className="section">
-          <h2>What kind of learning experience would you prefer?</h2>
-          <div className="button-container">
-            <button className="cta-button" onClick={() => window.location.href = '/guided-trading'}>
+        <Box>
+          <Typography variant="h4" gutterBottom>
+            What kind of learning experience would you prefer?
+          </Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
+            <Button variant="contained" size="large" onClick={() => window.location.href = '/guided-trading'}>
               Something simple to get started
-            </button>
-            <button className="cta-button" onClick={() => window.location.href = '/real-life-scenario'}>
+            </Button>
+            <Button variant="contained" size="large" onClick={() => window.location.href = '/real-life-scenario'}>
               I’d like a challenge
-            </button>
-            <button className="cta-button" onClick={() => window.location.href = '/ai-trading-mode'}>
+            </Button>
+            <Button variant="contained" size="large" onClick={() => window.location.href = '/ai-trading-mode'}>
               Surprise me
-            </button>
-          </div>
-        </div>
+            </Button>
+          </Box>
+        </Box>
       )}
-    </div>
+    </Container>
   );
 };
 

@@ -1,12 +1,16 @@
 import React from 'react';
+import { Container, Typography } from '@mui/material';
 
 const LearningMode = () => {
   return (
-    <div className="learning-mode">
-      <h2>Learning Mode</h2>
-      <p>This section will provide the basics of trading, using courseware and articles.</p>
-      {/* Add your educational content here */}
-    </div>
+    <Container>
+      <Typography variant="h4" gutterBottom>
+        Learning Mode
+      </Typography>
+      <Typography variant="body1">
+        This section will provide the basics of trading, using courseware and articles.
+      </Typography>
+    </Container>
   );
 };
 
