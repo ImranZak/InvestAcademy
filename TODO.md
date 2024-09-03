@@ -2,8 +2,10 @@
 
 - [x] Create flask project (Jake)
 - [x] Basic Landing page (Jake)
-- [X] Implement persistent storage with SQLite (Jake)
-- [X] User model and routes (Jake)
+- [x] Implement persistent storage with SQLite (Jake)
+- [x] User model and routes (Jake)
+- [ ] Complete landing page (Imran)
+- [ ] Trading model and routes (Imran)
+- [ ] Learning module (Amsyar)
 - [ ] Host website (Bryan)
-- [ ] Full landing page (?)
 - [ ] Main dashboard (?)
