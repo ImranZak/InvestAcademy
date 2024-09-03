@@ -7,5 +7,5 @@
 - [ ] Complete landing page (Imran)
 - [ ] Trading model and routes (Imran)
 - [ ] Learning module (Amsyar)
-- [ ] Host website (Bryan)
+- [ ] Host website (Brian)
 - [ ] Main dashboard (?)
