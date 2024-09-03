@@ -9,7 +9,7 @@ import AITradingMode from './pages/AITradingMode';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/InvestAcademy">
       <Container>
         <Routes>
           <Route path="/" element={<Landing />} />
