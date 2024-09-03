@@ -1,12 +1,16 @@
 import React from 'react';
+import { Container, Typography } from '@mui/material';
 
 const GuidedTrading = () => {
   return (
-    <div className="guided-trading">
-      <h2>Guided Trading Feature</h2>
-      <p>This section will guide users through trading with fixed-stock trajectories.</p>
-      {/* Implement the guided trading feature here */}
-    </div>
+    <Container>
+      <Typography variant="h4" gutterBottom>
+        Guided Trading Feature
+      </Typography>
+      <Typography variant="body1">
+        This section will guide users through trading with fixed-stock trajectories.
+      </Typography>
+    </Container>
   );
 };
 
