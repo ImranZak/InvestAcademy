@@ -7,7 +7,7 @@
 - [x] Complete landing page (Imran)
 - [ ] Trading model and routes (Imran)
 - [ ] Learning module (Amsyar)
-- [ ] Host website (Bryan)
+- [ ] Host website (Brian)
 - [ ] Login (Jake)
 - [ ] Main dashboard (Imran/Bryan)
 - [ ] AI Trading model (Jerald)

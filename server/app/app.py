@@ -5,7 +5,8 @@ import requests
 db = SQLAlchemy()
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///investacademy.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///investacademy.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://u8nr3n8g0oh2vt:p462cc1456f16fb30594d14b69a4227f039b470881270c326857b0d0eacedbeda@cd1goc44htrmfn.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d3sa1io7d7s4pn'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
