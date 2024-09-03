@@ -13,11 +13,15 @@ db.init_app(app)
 from app.routes.user import user_bp
 app.register_blueprint(user_bp)
 
+# Import the trading and portfolio routes
+from app.routes.trading import trading_bp
+from app.routes.portfolio import portfolio_bp
+app.register_blueprint(trading_bp, url_prefix='/trading')
+app.register_blueprint(portfolio_bp, url_prefix='/portfolio')
 
 @app.route('/')
 def home():
     return render_template('index.html')
-
 
 @app.route('/test')
 def populate():
@@ -30,7 +34,7 @@ def populate():
     print(response.status_code)
     print(users)
 
-   # Delete all users
+    # Delete all users
     for user in users:
         try:
             response = requests.delete(f"{url}/{user['id']}")
@@ -53,7 +57,6 @@ def populate():
         print(response.json())
 
     return redirect(url_for('home'))
-
 
 if __name__ == '__main__':
     with app.app_context():

@@ -1,40 +1,60 @@
-.landing-page {
+.landing-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #f0f0f0;
-}
-
-.cta-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #007bff;
+    text-align: center;
+  }
+  
+  .section {
+    margin: 20px;
+  }
+  
+  h1, h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+  }
+  
+  p {
+    font-size: 1.5rem;
+    margin: 10px 0;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .cta-button {
+    background-color: #1976d2;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.25rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.cta-button:hover {
-    background-color: #0056b3;
-}
-
-.cta-button {
-    padding: 12px 24px;
-    font-size: 18px;
-    color: #fff;
-    background-color: #004085;
-    border: 2px solid #004085;
+    transition: background-color 0.3s;
+  }
+  
+  .cta-button:hover {
+    background-color: #145a86;
+  }
+  
+  .placeholder-button {
+    background-color: #1976d2;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.25rem;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-    font-family: 'Merriweather', serif;
-}
-
-.cta-button:hover {
-    background-color: #002752;
-    border-color: #002752;
-}
+    transition: background-color 0.3s;
+    margin-top: 20px;
+  }
+  
+  .placeholder-button:hover {
+    background-color: #145a86;
+  }
+  
