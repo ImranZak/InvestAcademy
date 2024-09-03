@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://ImranZak.github.io/InvestAcademy",
+  "homepage": "https://imranzak.github.io/InvestAcademy",
   "scripts": {
     "start": "vite",
     "dev": "vite",
