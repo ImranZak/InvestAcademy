@@ -1,12 +1,16 @@
 import React from 'react';
+import { Container, Typography } from '@mui/material';
 
 const AITradingMode = () => {
   return (
-    <div className="ai-trading-mode">
-      <h2>AI Trading Mode</h2>
-      <p>This section will use AI to simulate random stock prices for trading.</p>
-      {/* Implement the AI trading mode feature here */}
-    </div>
+    <Container>
+      <Typography variant="h4" gutterBottom>
+        AI Trading Mode
+      </Typography>
+      <Typography variant="body1">
+        This section will use AI to simulate random stock prices for trading.
+      </Typography>
+    </Container>
   );
 };
 
