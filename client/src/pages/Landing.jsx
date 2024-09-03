@@ -19,7 +19,7 @@ const Landing = () => {
         <Fade in={checked} timeout={1000}>
           <Box>
             <Slide 
-              direction={checked ? "up" : "down"} 
+              direction="up" 
               in={checked} 
               timeout={1000} 
               mountOnEnter 
@@ -41,7 +41,7 @@ const Landing = () => {
         <Fade in={checked} timeout={1000}>
           <Box>
             <Slide 
-              direction={checked ? "up" : "down"} 
+              direction="up" 
               in={checked} 
               timeout={1000} 
               mountOnEnter 
@@ -68,7 +68,7 @@ const Landing = () => {
         <Fade in={checked} timeout={1000}>
           <Box>
             <Slide 
-              direction={checked ? "up" : "down"} 
+              direction="up" 
               in={checked} 
               timeout={1000} 
               mountOnEnter 
