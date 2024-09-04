@@ -4,21 +4,28 @@ Stock Trading Educational Platform
 
 ## Features
 
-Learning Module & Guided Training
+Learning Module
 
 - an introductory course about stocks
 - teach teenagers about the concepts
 
-Second Feature: Quiz Application
+Guided Training
+
+- help users practise their knowledge
+- combination of case studies and graph visualisation
+
+Real-life scenarios & Random AI Mode
+
+- real-life scenarios with graph visualisations
+- generate case studies using AI
+- user must decide to buy/sell
+- a mix of real and fake case studies using AI
+- example of a case study: Wall Street Crash happened then the stock prices suddenly change, what do you do in that scenario?
+
+Community Quizzes (TBD)
 
 - quiz app where admins can add in questions, pre-set pool of questions
 - then the community can make their own quizzes, but needs to go through regulation
-
-Third Feature: Real-life scenarios & Random AI Mode
-
-- generate case studies using AI
-- a mix of real and fake case studies using AI
-- example of a case study: Wall Street Crash happened then the stock prices suddenly change, what do you do in that scenario?
 
 ## Important commands
 
