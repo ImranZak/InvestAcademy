@@ -6,7 +6,7 @@
 - [x] User model and routes (Jake)
 - [x] Complete landing page (Imran)
 - [x] Host website (Imran)
-- [x] Login (Jake)
+- [x] User login routes (Jake)
 - [ ] Trading model and routes (Imran)
 - [ ] Main dashboard (Imran/Bryan)
 - [ ] AI Trading model (Jerald)
