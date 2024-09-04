@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Typography } from '@mui/material';
+import { fetchRealLifeScenariosData } from '../api'; // Import the API function
 
 const RealLifeScenario = () => {
+  const [scenarioData, setScenarioData] = useState([]);
+
+  useEffect(() => {
+    fetchRealLifeScenariosData().then(data => setScenarioData(data)).catch(error => console.error(error));
+  }, []);
+
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
         Real-Life Scenario
       </Typography>
-      <Typography variant="body1">
-        This section will simulate real-life scenarios and generate case studies.
-      </Typography>
+      <ul>
+        {scenarioData.map((scenario, index) => (
+          <li key={index}>{scenario.stock}: ${scenario.price}</li>
+        ))}
+      </ul>
     </Container>
   );
 };

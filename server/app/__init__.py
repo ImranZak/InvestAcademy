@@ -1,10 +1,13 @@
 from flask import Flask, render_template, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 import requests
 
 db = SQLAlchemy()
 
+
 app = Flask(__name__)
+CORS(app) 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///investacademy.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
