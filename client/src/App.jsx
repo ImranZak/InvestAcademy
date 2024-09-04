@@ -10,6 +10,7 @@ import AITradingMode from './pages/AITradingMode';
 import Dashboard from './pages/Dashboard'; // Ensure you have a Dashboard page
 import { useEffect, useState } from 'react';
 import ErrorBoundary from './ErrorBoundary'; // Import error boundary if needed
+import Layout from './Layout'; // Import Layout for pages with Navbar
 
 const theme = createTheme({
   palette: {
@@ -60,12 +61,19 @@ function App() {
         <Router basename="/InvestAcademy">
           <Container>
             <Routes>
+              {/* Exclude Navbar for Landing page */}
               <Route path="/" element={hasVisited ? <Navigate to="/dashboard" /> : <Landing onChoice={handleChoice} />} />
-              <Route path="/learning-mode" element={<LearningMode />} />
-              <Route path="/guided-trading" element={<GuidedTrading />} />
-              <Route path="/real-life-scenario" element={<RealLifeScenario />} />
-              <Route path="/ai-trading-mode" element={<AITradingMode />} />
-              <Route path="/dashboard" element={<Dashboard />} />
+
+              {/* Pages with Navbar using Layout */}
+              <Route element={<Layout />}>
+                <Route path="/learning-mode" element={<LearningMode />} />
+                <Route path="/guided-trading" element={<GuidedTrading />} />
+                <Route path="/real-life-scenario" element={<RealLifeScenario />} />
+                <Route path="/ai-trading-mode" element={<AITradingMode />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+              </Route>
+
+              {/* Fallback Route */}
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </Container>

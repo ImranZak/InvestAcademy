@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Typography, Card, CardContent, Button, Box } from '@mui/material';
-import Navbar from './Navbar'; // Importing Navbar
 
 const quizQuestions = [
   {
@@ -168,7 +167,6 @@ const GuidedTrading = () => {
 
   return (
     <div>
-      <Navbar /> {/* Adding the Navbar to the page */}
       <Container>
         <Typography variant="h4" gutterBottom>
           Financial Literacy Quiz

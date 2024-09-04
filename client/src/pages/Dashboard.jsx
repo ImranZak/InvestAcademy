@@ -6,7 +6,7 @@ const Dashboard = () => {
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
-        Dashboard
+        Home
       </Typography>
       <Grid container spacing={4}>
         <Grid item xs={12} sm={6} md={4}>
