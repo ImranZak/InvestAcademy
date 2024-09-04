@@ -134,7 +134,6 @@ const GuidedTrading = () => {
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    // Shuffle the questions and ensure the array is not empty
     const shuffled = [...quizQuestions].sort(() => Math.random() - 0.5);
     setShuffledQuestions(shuffled);
   }, []);
@@ -171,6 +170,11 @@ const GuidedTrading = () => {
         <Typography variant="h4" gutterBottom>
           Financial Literacy Quiz
         </Typography>
+
+        <Typography variant="h6" gutterBottom>
+          Question {currentQuestion + 1} of {shuffledQuestions.length}
+        </Typography>
+
         {showScore ? (
           <Typography variant="h5">
             You scored {score} out of {shuffledQuestions.length}
