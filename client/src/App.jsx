@@ -9,7 +9,7 @@ import AITradingMode from './pages/AITradingMode';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/InvestAcademy">
       <Container>
         <Routes>
           <Route path="/" element={<Landing />} />
@@ -17,6 +17,7 @@ function App() {
           <Route path="/guided-trading" element={<GuidedTrading />} />
           <Route path="/real-life-scenario" element={<RealLifeScenario />} />
           <Route path="/ai-trading-mode" element={<AITradingMode />} />
+          <Route path="*" element={<Landing />} /> {/* Catch-all route to handle 404 */}
         </Routes>
       </Container>
     </Router>

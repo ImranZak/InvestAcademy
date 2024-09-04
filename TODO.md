@@ -7,7 +7,12 @@
 - [x] Complete landing page (Imran)
 - [ ] Trading model and routes (Imran)
 - [ ] Learning module (Amsyar)
-- [ ] Host website (Bryan)
+<<<<<<< HEAD
+- [ ] Host website (Brian)
 - [ ] Login (Jake)
 - [ ] Main dashboard (Imran/Bryan)
 - [ ] AI Trading model (Jerald)
+=======
+- [ ] Host website (Bryan)
+- [ ] Main dashboard (?)
+>>>>>>> parent of c66742d (hosting update)
