@@ -7,6 +7,8 @@
 - [x] Complete landing page (Imran)
 - [x] Host website (Imran)
 - [x] User login routes (Jake)
+- [ ] User login pages (Jake)
+- [ ] Integrate quiz with user profile (Jake)
 - [ ] Trading model and routes (Imran)
 - [ ] Main dashboard (Imran/Bryan)
 - [ ] AI Trading model (Jerald)
