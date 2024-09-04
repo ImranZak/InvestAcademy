@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Typography, Button, Box, Slide, Fade } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const Landing = () => {
+const Landing = ({ onChoice }) => {
   const [section, setSection] = useState(1);
   const [checked, setChecked] = useState(true);
   const [direction, setDirection] = useState('up');
-  const navigate = useNavigate();  // Use useNavigate for internal navigation
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if user has visited before and redirect to dashboard if true
+    const visited = localStorage.getItem('hasVisited');
+    if (visited) {
+      navigate('/dashboard');
+    }
+  }, [navigate]);
 
   const handleNextSection = (nextSection) => {
     setChecked(false);
@@ -16,6 +24,11 @@ const Landing = () => {
       setDirection('up');
       setChecked(true);
     }, 700);
+  };
+
+  const handleSelection = (path) => {
+    onChoice(); // Mark as visited in localStorage
+    navigate(path); // Redirect to the chosen path (learning mode, guided trading, etc.)
   };
 
   return (
@@ -57,7 +70,7 @@ const Landing = () => {
                   Are you new to investing?
                 </Typography>
                 <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
-                  <Button variant="contained" size="large" onClick={() => navigate('/learning-mode')}>
+                  <Button variant="contained" size="large" onClick={() => handleSelection('/learning-mode')}>
                     Yes, I’d like to learn the basics
                   </Button>
                   <Button variant="contained" size="large" onClick={() => handleNextSection(3)}>
@@ -84,13 +97,13 @@ const Landing = () => {
                   What kind of learning experience would you prefer?
                 </Typography>
                 <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
-                  <Button variant="contained" size="large" onClick={() => navigate('/guided-trading')}>
+                  <Button variant="contained" size="large" onClick={() => handleSelection('/guided-trading')}>
                     Something simple to get started
                   </Button>
-                  <Button variant="contained" size="large" onClick={() => navigate('/real-life-scenario')}>
+                  <Button variant="contained" size="large" onClick={() => handleSelection('/real-life-scenario')}>
                     I’d like a challenge
                   </Button>
-                  <Button variant="contained" size="large" onClick={() => navigate('/ai-trading-mode')}>
+                  <Button variant="contained" size="large" onClick={() => handleSelection('/ai-trading-mode')}>
                     Surprise me
                   </Button>
                 </Box>
