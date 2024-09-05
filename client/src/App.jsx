@@ -74,7 +74,7 @@ function App() {
           <Container sx={{mt:10}}>
             <Routes>
               {/* Exclude Navbar for Landing page */}
-              <Route path="/" element={hasVisited ? <Navigate to="/dashboard" /> : <Landing onChoice={handleChoice} />} />
+              <Route path="/" element={hasVisited ? <Navigate to="/homepage" /> : <Landing onChoice={handleChoice} />} />
 
               {/* Pages with Navbar using Layout */}
               <Route element={<Layout />}>
