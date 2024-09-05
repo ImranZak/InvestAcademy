@@ -3,6 +3,8 @@ import { Container } from '@mui/material';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Landing from './pages/Landing';
+import HomePage from './pages/HomePage';
+import AboutUs from './pages/AboutUs';
 import LearningMode from './pages/LearningMode';
 import ModuleQuiz from './components/ModuleQuiz';
 import GuidedTrading from './pages/GuidedTrading';
@@ -69,13 +71,15 @@ function App() {
     <ThemeProvider theme={theme}>
       <ErrorBoundary>
         <Router basename="/InvestAcademy">
-          <Container>
+          <Container sx={{mt:10}}>
             <Routes>
               {/* Exclude Navbar for Landing page */}
               <Route path="/" element={hasVisited ? <Navigate to="/dashboard" /> : <Landing onChoice={handleChoice} />} />
 
               {/* Pages with Navbar using Layout */}
               <Route element={<Layout />}>
+                <Route path="/homepage" element={<HomePage/>}/>
+                <Route path="/aboutus" element={<AboutUs/>}/>
                 <Route path="/learning-mode" element={<LearningMode />} />
                 <Route path="/module-quiz" element={<ModuleQuiz/>}/>
                 <Route path="/guided-trading" element={<GuidedTrading />} />
