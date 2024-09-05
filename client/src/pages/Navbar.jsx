@@ -20,6 +20,7 @@ const Navbar = ({ onDebug }) => {
         {/* Navigation Links */}
         <Box sx={{ display: 'flex', gap: '1.5rem' }}>
           <Button color="inherit" component={Link} to="/" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Home</Button>
+          <Button color="inherit" component={Link} to="/learning-mode" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Course</Button>
           <Button color="inherit" component={Link} to="/resources" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Resources</Button>
           <Button color="inherit" component={Link} to="/leaderboard" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Leaderboard</Button>
           <Button color="inherit" component={Link} to="/events" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Events</Button>
