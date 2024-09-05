@@ -8,6 +8,7 @@ import ModuleQuiz from './components/ModuleQuiz';
 import GuidedTrading from './pages/GuidedTrading';
 import RealLifeScenario from './pages/RealLifeScenario';
 import AITradingMode from './pages/AITradingMode';
+import CaseStudies from './pages/CaseStudies';
 import Dashboard from './pages/Dashboard'; // Ensure you have a Dashboard page
 import { useEffect, useState } from 'react';
 import ErrorBoundary from './ErrorBoundary'; // Import error boundary if needed
@@ -80,6 +81,7 @@ function App() {
                 <Route path="/guided-trading" element={<GuidedTrading />} />
                 <Route path="/real-life-scenario" element={<RealLifeScenario />} />
                 <Route path="/ai-trading-mode" element={<AITradingMode />} />
+                <Route path="/casestudies" element={<CaseStudies />} />
                 <Route path="/dashboard" element={<Dashboard />} />
               </Route>
 

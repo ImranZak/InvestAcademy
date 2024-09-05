@@ -29,6 +29,19 @@ const Dashboard = () => {
             </CardContent>
           </Card>
         </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <Card>
+            <CardContent>
+              <Typography variant="h5">Real Case Studies</Typography>
+              <br></br>
+              <Typography >Train users to use their newly aquired skills and knowledge. This also tests the users ability to research and identify if a company is worth investing or not!</Typography>
+              <br></br>
+              <Button component={Link} to="/casestudies" variant="contained" color="primary">
+                Go to Case Studies
+              </Button>
+            </CardContent>
+          </Card>
+        </Grid>
         {/* Add more cards for other features like AI Trading Mode */}
       </Grid>
     </Container>
