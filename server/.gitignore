@@ -6,4 +6,3 @@ app/models/__pycache__/
 app/routes/__pycache__/
 instance/
 .env
-.env.dev

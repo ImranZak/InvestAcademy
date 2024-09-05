@@ -21,7 +21,7 @@ def token_required(f):
         if 'Authorization' in request.headers:
             token = request.headers['Authorization']
         if not token:
-            return jsonify({'message' : 'Token is missing !!'}), 401
+            return jsonify({'message' : 'Token is missing !!'}), 400
         try:
             data = jwt.decode(token, app.config['SECRET_KEY'], algorithms='HS256')
             current_user = User.query\
@@ -30,7 +30,7 @@ def token_required(f):
         except Exception as e:
             return jsonify({
                 'message' : f'Token is invalid !! {e}'
-            }), 401
+            }), 400
         return  f(current_user, *args, **kwargs)
     return decorated
 
@@ -46,6 +46,7 @@ def register():
 
 
 @user_bp.route('/login', methods=['POST'])
+
 def login():
     data = request.get_json()
     user = User.query.filter_by(email=data['email']).first()
@@ -54,14 +55,14 @@ def login():
             'user_id': user.id,
             'exp':  datetime.now() + timedelta(hours=24)
         }, app.config['SECRET_KEY'], algorithm='HS256')
-        return jsonify({'message': 'Login successful', 'token': token})
-    return jsonify({'message': 'Invalid credentials'}), 401
+        return jsonify({'message': 'Login successful', 'username': user.username, 'token': token})
+    return jsonify({'message': 'Invalid email or username'}), 400
 
 
 @user_bp.route('/authenticate', methods=['GET'])
 @token_required
 def authenticate(current_user):
-    return jsonify({'id': current_user.id, 'email': current_user.email})
+    return jsonify({'user': {'id': current_user.id, 'email': current_user.email}})
 
 
 @user_bp.route('/users', methods=['POST'])
@@ -83,7 +84,7 @@ def get_users():
 @user_bp.route('/users/<int:id>', methods=['GET'])
 def get_user(id):
     user = User.query.get_or_404(id)
-    return jsonify({'id': user.id, 'username': user.username, 'email': user.email})
+    return jsonify({'id': user.id, 'username': user.username, 'email': user.email, 'highScore': user.high_score})
 
 
 @user_bp.route('/users/<int:id>', methods=['PUT'])
@@ -94,6 +95,15 @@ def update_user(id):
     user.email = data['email']
     db.session.commit()
     return jsonify({'message': 'User updated successfully'})
+
+
+@user_bp.route('/high_score/<int:id>', methods=['PUT'])
+def high_score(id):
+    score = request.get_json()['score']
+    user = User.query.get_or_404(id)
+    user.high_score = max(score, user.high_score)
+    db.session.commit()
+    return jsonify({'message': 'User score updated successfully'})
 
 
 @user_bp.route('/users/<int:id>', methods=['DELETE'])

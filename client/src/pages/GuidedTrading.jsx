@@ -1,5 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Container, Typography, Card, CardContent, Button, Box } from '@mui/material';
+import http from '../http.js'
+import UserContext from '../contexts/UserContext';
+
 
 const quizQuestions = [
   {
@@ -132,6 +136,9 @@ const GuidedTrading = () => {
   const [showScore, setShowScore] = useState(false);
   const [feedback, setFeedback] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const { user } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const shuffled = [...quizQuestions].sort(() => Math.random() - 0.5);
@@ -158,6 +165,18 @@ const GuidedTrading = () => {
     } else {
       setShowScore(true);
     }
+    if (user) {
+      http.put(`/high_score/${user.id}`, { 'score': score })
+        .catch(function (err) {
+            console.error(err)
+            toast.error(`${err.response.data.message}`);
+        });
+    }
+  };
+  
+  const handleSaveScore = () => {
+    localStorage.setItem('highScore', score)
+    navigate('/login')
   };
 
   if (shuffledQuestions.length === 0) {
@@ -176,9 +195,16 @@ const GuidedTrading = () => {
         </Typography>
 
         {showScore ? (
-          <Typography variant="h5">
+          <>
+            <Typography variant="h5">
             You scored {score} out of {shuffledQuestions.length}
-          </Typography>
+            </Typography>
+            { user ? 
+              <Button variant='contained' sx={{ mt: 3 }} component='Link' to="/profile">Check high score</Button>
+              :
+              <Button variant='contained' sx={{ mt: 3 }} onClick={handleSaveScore}>Login to save score</Button>
+            }
+          </>
         ) : (
           <Card sx={{ maxWidth: 800, margin: '0 auto' }}>
             <CardContent>

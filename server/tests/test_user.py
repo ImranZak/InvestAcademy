@@ -74,7 +74,7 @@ class TestUser(TestCase):
 
         print(response.json)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json['email'], 'test@example.com')
+        self.assertEqual(response.json['user']['email'], 'test@example.com')
 
 if __name__ == '__main__':
     unittest.main()

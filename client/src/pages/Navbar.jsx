@@ -1,8 +1,17 @@
-import React from 'react';
-import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { AppBar, Toolbar, Typography, Button, Box, Avatar, Container } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
+import UserContext from '../contexts/UserContext';
 
 const Navbar = ({ onDebug }) => {
+  const { user } = useContext(UserContext);
+  const navigate = useNavigate()
+
+  const logout = () => {
+    localStorage.clear();
+    window.location = "/";
+  };
+
   return (
     <AppBar 
       position="static"
@@ -24,12 +33,15 @@ const Navbar = ({ onDebug }) => {
           <Button color="inherit" component={Link} to="/leaderboard" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Leaderboard</Button>
           <Button color="inherit" component={Link} to="/events" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Events</Button>
           <Button color="inherit" component={Link} to="/community" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Community</Button>
+          { user ? 
+            <>
+              <Button color="inherit" onClick={logout} sx={{ color: '#ffffff', fontWeight: 'bold' }}>Logout</Button>
+              <Button><Avatar onClick={() => {navigate('/profile')}}></Avatar></Button>
+            </>
+            :
+            <Button color="inherit" component={Link} to="/login" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Login</Button>
+          }
         </Box>
-
-        {/* Debug Button */}
-        <Button color="inherit" onClick={onDebug} sx={{ color: '#ffffff', fontWeight: 'bold' }}>
-          Debug
-        </Button>
       </Toolbar>
     </AppBar>
   );
