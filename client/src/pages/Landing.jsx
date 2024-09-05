@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Container, Typography, Button, Box, Slide, Fade } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,14 +7,6 @@ const Landing = ({ onChoice }) => {
   const [checked, setChecked] = useState(true);
   const [direction, setDirection] = useState('up');
   const navigate = useNavigate();
-
-  useEffect(() => {
-    // Check if user has visited before and redirect to dashboard if true
-    const visited = localStorage.getItem('hasVisited');
-    if (visited) {
-      navigate('/dashboard');
-    }
-  }, [navigate]);
 
   const handleNextSection = (nextSection) => {
     setChecked(false);

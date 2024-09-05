@@ -11,5 +11,5 @@
 - [ ] Integrate quiz with user profile (Jake)
 - [ ] Trading model and routes (Imran)
 - [ ] Main dashboard (Imran/Bryan)
-- [ ] Questions on companies (Jerald)
+- [x] Questions on companies (Jerald)
 - [ ] Learning module (Amsyar)
