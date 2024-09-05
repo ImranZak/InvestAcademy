@@ -23,11 +23,6 @@ const Navbar = ({ onDebug }) => {
           <Button color="inherit" component={Link} to="/learning-mode" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Course</Button>
           <Button color="inherit" component={Link} to="/leaderboard" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Leaderboard</Button>
         </Box>
-
-        {/* Debug Button */}
-        <Button color="inherit" onClick={onDebug} sx={{ color: '#ffffff', fontWeight: 'bold' }}>
-          Debug
-        </Button>
       </Toolbar>
     </AppBar>
   );
