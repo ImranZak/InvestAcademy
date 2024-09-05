@@ -178,111 +178,138 @@ const GuidedTrading = () => {
     }
   };
 
+  const restartQuiz = () => {
+    setCurrentQuestion(0);
+    setSelectedOption(null);
+    setSubmitted(false);
+    setFeedback('');
+    setScore(0);
+    setShowScore(false);
+  };
+
   if (shuffledQuestions.length === 0) {
     return <Typography>Loading...</Typography>;
   }
 
   return (
-    <div>
-      <Container>
-        <Typography variant="h4" gutterBottom>
-          Financial Literacy Quiz
-        </Typography>
+    <Container>
+      <Typography variant="h4" gutterBottom align="center">
+        Financial Literacy Quiz
+      </Typography>
 
-        <LinearProgress
-          variant="determinate"
-          value={((currentQuestion + 1) / shuffledQuestions.length) * 100}
-          sx={{ marginBottom: 2 }}
-        />
-        <Typography variant="body2" color="textSecondary">
-          Question {currentQuestion + 1} of {shuffledQuestions.length}
-        </Typography>
+      <LinearProgress
+        variant="determinate"
+        value={((currentQuestion + 1) / shuffledQuestions.length) * 100}
+        sx={{ marginBottom: 2 }}
+      />
+      <Typography variant="body2" color="textSecondary" align="center">
+        Question {currentQuestion + 1} of {shuffledQuestions.length}
+      </Typography>
 
-        {showScore ? (
-          <Typography variant="h5">
-            You scored {score} out of {shuffledQuestions.length}
-          </Typography>
-        ) : (
-          <Card sx={{ maxWidth: 800, margin: '0 auto' }}>
-            <CardContent>
-              <Typography variant="h5" gutterBottom>
-                {shuffledQuestions[currentQuestion].question}
-              </Typography>
+      {showScore ? (
+        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '20vh' }}>
+          <Box sx={{ textAlign: 'center', padding: 2, border: '1px solid gray', borderRadius: 3, backgroundColor: '#f5f5f5' }}>
+            <Typography variant="h5" component="div">
+              You scored
+            </Typography>
+            <Typography variant="h3" component="div">
+              {score} / {shuffledQuestions.length}
+            </Typography>
+          </Box>
+          <Box sx={{ marginTop: 3 }}>
+            <Button variant="contained" onClick={restartQuiz}>
+              Retry
+            </Button>
+          </Box>
+        </Box>
+      ) : (
+        <Card sx={{ maxWidth: 800, margin: '0 auto' }}>
+          <CardContent>
+            <Typography variant="h5" gutterBottom>
+              {shuffledQuestions[currentQuestion].question}
+            </Typography>
 
-              {/* Conditionally render image if it exists */}
-              {shuffledQuestions[currentQuestion].image && (
-                <CardMedia
-                  component="img"
-                  height="200"
-                  image={shuffledQuestions[currentQuestion].image}
-                  alt="Question Image"
-                  sx={{ marginBottom: 2, objectFit: 'contain', width: '100%' }}
-                />
-              )}
+            {shuffledQuestions[currentQuestion].image && (
+              <CardMedia
+                component="img"
+                height="200"
+                image={shuffledQuestions[currentQuestion].image}
+                alt="Question Image"
+                sx={{ marginBottom: 2, objectFit: 'contain', width: '100%' }}
+              />
+            )}
 
-              <Box>
-                {shuffledQuestions[currentQuestion].options.map((option, index) => (
-                  <Button
-                    key={index}
-                    variant="contained"
-                    fullWidth
-                    onClick={() => setSelectedOption(index)}
-                    sx={{
-                      margin: '10px 0',
-                      backgroundColor:
-                        submitted && selectedOption === index
-                          ? index === shuffledQuestions[currentQuestion].correctAnswer
-                            ? 'green'
-                            : 'red'
-                          : 'white',
-                      '&:hover': {
-                        backgroundColor: 'lightgray',
-                      },
-                      color: 'black'
-                    }}
-                    disabled={submitted} // Disable buttons after submission
-                  >
-                    {option}
-                  </Button>
-                ))}
-              </Box>
+            <Box>
+              {shuffledQuestions[currentQuestion].options.map((option, index) => (
+                <Button
+                  key={index}
+                  variant="contained"
+                  fullWidth
+                  onClick={() => setSelectedOption(index)}
+                  sx={{
+                    margin: '10px 0',
+                    backgroundColor:
+                      submitted && selectedOption === index
+                        ? index === shuffledQuestions[currentQuestion].correctAnswer
+                          ? 'green'
+                          : 'red'
+                        : 'white',
+                    '&:hover': {
+                      backgroundColor: 'lightgray',
+                    },
+                    color: 'black'
+                  }}
+                  disabled={submitted}
+                >
+                  {option}
+                </Button>
+              ))}
+            </Box>
 
-              <Box sx={{ marginTop: 4 }}>
-                {feedback === '' ? (
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSubmitAnswer}
-                    disabled={selectedOption === null}
-                  >
-                    Submit Answer
-                  </Button>
-                ) : (
-                  <Box>
-                    <Fade in={submitted}>
-                      <Typography
-                        variant="body1"
-                        color={selectedOption === shuffledQuestions[currentQuestion].correctAnswer ? "green" : "red"}
-                      >
-                        {feedback}
-                      </Typography>
-                    </Fade>
+            <Box sx={{ marginTop: 4, display: 'flex', justifyContent: 'center' }}>
+              {feedback === '' ? (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSubmitAnswer}
+                  disabled={selectedOption === null}
+                >
+                  Submit Answer
+                </Button>
+              ) : (
+                <Box>
+                  <Fade in={submitted}>
+                    <Typography
+                      variant="body1"
+                      color={selectedOption === shuffledQuestions[currentQuestion].correctAnswer ? "green" : "red"}
+                      align="center"
+                    >
+                      {feedback}
+                    </Typography>
+                  </Fade>
+                  <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 2 }}>
                     <Button
                       variant="contained"
                       color="primary"
                       onClick={handleNextAfterFeedback}
-                      sx={{ marginTop: 2 }}
                     >
                       Next Question
                     </Button>
                   </Box>
-                )}
-              </Box>
-            </CardContent>
-          </Card>
-        )}
-      </Container>
-    </div>
+                  {!showScore && (
+                    <Box sx={{ marginTop: 4, display: 'flex', justifyContent: 'center' }}>
+                      <Button variant="contained" onClick={restartQuiz}>
+                        Restart from Beginning
+                      </Button>
+                    </Box>
+                  )}
+                </Box>
+              )}
+            </Box>
+          </CardContent>
+        </Card>
+      )}
+    </Container>
   );
 };
 
