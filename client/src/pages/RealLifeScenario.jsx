@@ -182,18 +182,38 @@ const RealLifeScenario = () => {
     }
   };
 
+  const restartQuiz = () => {
+    setCurrentScenario(0);
+    setUserAction(null);
+    setShowResult(false);
+    setScore(0);
+    setShowScore(false);
+  };
+
   const { title, description, correctAction, correctComment, wrongComment, stockData, stockDataLabel, labels, stockPrice, graphType, yMin, yMax } = scenarios[currentScenario];
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
+    <Container sx={{ paddingTop: 4, maxWidth: '800px', margin: '0 auto' }}> {/* Fixed margin container */}
+      <Typography variant="h4" gutterBottom align="center">
         Real-Life Stock Scenarios
       </Typography>
 
       {showScore ? (
-        <Typography variant="h5">
-          You scored {score} out of {scenarios.length}
-        </Typography>
+        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '20vh' }}>
+          <Box sx={{ textAlign: 'center', padding: 2, border: '1px solid gray', borderRadius: 3, backgroundColor: '#f5f5f5' }}>
+            <Typography variant="h5" component="div">
+              You scored
+            </Typography>
+            <Typography variant="h3" component="div">
+              {score} / {scenarios.length}
+            </Typography>
+          </Box>
+          <Box sx={{ marginTop: 3 }}> {/* Adjusted margin for Retry button */}
+            <Button variant="contained" onClick={restartQuiz}>
+              Retry
+            </Button>
+          </Box>
+        </Box>
       ) : (
         <Card>
           <CardContent>
@@ -202,18 +222,20 @@ const RealLifeScenario = () => {
             <Typography variant="body1" paragraph>{stockPrice}</Typography>
           </CardContent>
 
-          {/* Replace the static image with the StockChart component */}
-          <StockChart
-            labels={labels}
-            data={stockData}
-            title={title}
-            stockDataLabel={stockDataLabel}
-            graphType={graphType}
-            yMin={yMin}
-            yMax={yMax}
-          />
+          <Box sx={{ padding: 3 }}>
+            <StockChart
+              labels={labels}
+              data={stockData}
+              title={title}
+              stockDataLabel={stockDataLabel}
+              graphType={graphType}
+              yMin={yMin}
+              yMax={yMax}
+              sx={{ marginX: 1 }}
+            />
+          </Box>
 
-          <CardActions sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, marginTop: 2, marginX: 10}}>
+          <CardActions sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, marginTop: 2, marginX: 10 }}>
             {showResult && (
               <Typography variant="h6" color={userAction === correctAction ? "green" : "red"}>
                 {userAction === correctAction ? "Correct!" : "Wrong Action"}
@@ -226,22 +248,30 @@ const RealLifeScenario = () => {
               </Typography>
             )}
 
-            <Box sx={{ display: 'flex', gap: 2 }}>
-              <Button variant="contained" color="primary" onClick={() => handleAction("Buy")}>
-                Buy
-              </Button>
-              <Button variant="contained" color="secondary" onClick={() => handleAction("Sell")}>
-                Sell
-              </Button>
-            </Box>
+            {!showResult && (
+              <Box sx={{ display: 'flex', gap: 2, marginBottom: -1 }}>
+                <Button variant="contained" color="primary" onClick={() => handleAction("Buy")}>
+                  Buy
+                </Button>
+                <Button variant="contained" color="secondary" onClick={() => handleAction("Sell")}>
+                  Sell
+                </Button>
+              </Box>
+            )}
 
             {showResult && (
-              <Box sx={{ marginTop: 2 }}>
+              <Box sx={{ marginTop: 1, marginBottom: -1 }}>
                 <Button variant="contained" onClick={handleNextScenario}>
                   {currentScenario + 1 < scenarios.length ? 'Next Scenario' : 'View Score'}
                 </Button>
               </Box>
             )}
+
+            <Box sx={{ marginTop: 2, marginBottom: 1 }}>
+              <Button variant="contained" onClick={restartQuiz}>
+                Restart from Beginning
+              </Button>
+            </Box>
           </CardActions>
         </Card>
       )}
