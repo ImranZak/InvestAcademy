@@ -12,4 +12,6 @@
 - [ ] Trading model and routes (Imran)
 - [ ] Main dashboard (Imran/Bryan)
 - [x] Questions on companies (Jerald)
-- [ ] Learning module (Amsyar)
+- [x] Learning module (Amsyar)
+- [x] About Us Page (Amsyar)
+- [x] Home Page (Amsyar)
