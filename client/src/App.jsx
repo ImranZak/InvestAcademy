@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Landing from './pages/Landing';
 import LearningMode from './pages/LearningMode';
+import ModuleQuiz from './components/ModuleQuiz';
 import GuidedTrading from './pages/GuidedTrading';
 import RealLifeScenario from './pages/RealLifeScenario';
 import AITradingMode from './pages/AITradingMode';
@@ -33,12 +34,20 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          color: '#000000', // Black text for buttons
+          color: '#ffffff', // Black text for buttons
         },
       },
     },
   },
+  typography: {
+    fontFamily: 'Poppins, sans-serif',
+  },
 });
+
+
+
+
+
 
 function App() {
   const [hasVisited, setHasVisited] = useState(false);
@@ -67,6 +76,7 @@ function App() {
               {/* Pages with Navbar using Layout */}
               <Route element={<Layout />}>
                 <Route path="/learning-mode" element={<LearningMode />} />
+                <Route path="/module-quiz" element={<ModuleQuiz/>}/>
                 <Route path="/guided-trading" element={<GuidedTrading />} />
                 <Route path="/real-life-scenario" element={<RealLifeScenario />} />
                 <Route path="/ai-trading-mode" element={<AITradingMode />} />
