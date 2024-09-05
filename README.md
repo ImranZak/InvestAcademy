@@ -8,6 +8,7 @@ Learning Module
 
 - an introductory course about stocks
 - teach teenagers about the concepts
+- mini quiz to summarise what they have learnt
 
 Guided Training
 
