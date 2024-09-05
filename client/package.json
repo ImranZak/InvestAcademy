@@ -14,10 +14,11 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "@mui/icons-material": "^5.15.17",
-    "@mui/material": "^5.15.17",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^5.16.7",
+    "@mui/material": "^5.16.7",
+    "@mui/styles": "^6.0.2",
     "axios": "^1.6.8",
     "cors": "^2.8.5",
     "dayjs": "^1.11.11",
@@ -27,7 +28,9 @@
     "react-router-dom": "^6.23.0",
     "react-toastify": "^10.0.5",
     "toastify": "^2.0.1",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "notistack": "^3.0.1",
+    "react-youtube": "^10.1.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
