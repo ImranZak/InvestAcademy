@@ -1,13 +1,8 @@
-<<<<<<< HEAD
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Container, Typography, Card, CardContent, Button, Box } from '@mui/material';
 import http from '../http.js'
 import UserContext from '../contexts/UserContext';
-
-=======
-import React, { useState, useEffect } from 'react';
-import { Container, Typography, Card, CardContent, Button, Box, LinearProgress, CardMedia } from '@mui/material';
+import { Container, Typography, Card, CardContent, Button, Box, LinearProgress, CircularProgress, CardMedia } from '@mui/material';
 import { Fade } from '@mui/material';
 
 // Import images (replace these with the appropriate paths or URLs)
@@ -16,7 +11,6 @@ import DiversifyImg from "../assets/images/diversify.jpg";
 import DividendImg from "../assets/images/dividend.jpg";
 import BullMarketImg from "../assets/images/bull_market.jpg";
 import ETFImg from "../assets/images/etf.jpg";
->>>>>>> main
 
 const quizQuestions = [
   {
@@ -167,6 +161,8 @@ const GuidedTrading = () => {
   useEffect(() => {
     const shuffled = [...quizQuestions].sort(() => Math.random() - 0.5);
     setShuffledQuestions(shuffled);
+    setScore(6);
+    setCurrentQuestion(9);
   }, []);
 
   const handleSubmitAnswer = () => {
@@ -192,31 +188,30 @@ const GuidedTrading = () => {
         http.get(`/users/${user.id}`)
           .then((res) => {
             console.log(res.data);
-            const highScore = Math.max(res.data.highScore, score);
-            if (highScore === score) {
+            if (res.data.user.highScore < score) {
               setIsHighScore(true);
-            }
-            http.put(`/users/${user.id}`, { highScore: highScore })
-              .then((res) => {
-                console.log(res.data);
-              })
-              .catch(function (err) {
+              http.put(`/users/${user.id}`, { highScore: score })
+                .then((res) => {
+                  console.log(res.data); 
+                })
+                .catch(function (err) {
                   console.error(err)
                   toast.error(`${err.response.data.message}`);
-              });
+                });
+            }
           })
           .catch(function (err) {
-              console.error(err)
-              toast.error(`${err.response.data.message}`);
+            console.error(err)
+            toast.error(`${err.response.data.message}`);
           });
       }
     }
   };
-  
-  
+
+
   const handleSaveScore = () => {
-    localStorage.setItem('highScore', score)
-    navigate('/login')
+    localStorage.setItem('highScore', score);
+    navigate('/login');
   };
 
   const restartQuiz = () => {
@@ -234,7 +229,7 @@ const GuidedTrading = () => {
 
   return (
     <Container>
-      <Typography variant="h4" gutterBottom align="center">
+      <Typography sx={{ mt: 12 }} variant="h4" gutterBottom align="center">
         Financial Literacy Quiz
       </Typography>
 
@@ -247,76 +242,27 @@ const GuidedTrading = () => {
         Question {currentQuestion + 1} of {shuffledQuestions.length}
       </Typography>
 
-<<<<<<< HEAD
-        {showScore ? (
-          <>
-            <Typography variant="h5">
-            You scored {score} out of {shuffledQuestions.length}
-            </Typography>
-            {isHighScore && (
-              <Typography variant='h6' sx={{ color: 'green' }}>
-                New high score!
-              </Typography>
-            )}
-            { user ? 
-              <Button variant='contained' sx={{ mt: 3 }} component={Link} to="/profile">Check high score</Button>
-              :
-              <Button variant='contained' sx={{ mt: 3 }} onClick={handleSaveScore}>Login to save score</Button>
-            }
-          </>
-        ) : (
-          <Card sx={{ maxWidth: 800, margin: '0 auto' }}>
-            <CardContent>
-              <Typography variant="h5" gutterBottom>
-                {shuffledQuestions[currentQuestion].question}
-              </Typography>
-              <Box>
-                {shuffledQuestions[currentQuestion].options.map((option, index) => (
-                  <Button
-                    key={index}
-                    variant="contained"
-                    onClick={() => setSelectedOption(index)}
-                    sx={{
-                      margin: 1,
-                      color: 'black',
-                      backgroundColor:
-                        submitted && selectedOption === index
-                          ? index === shuffledQuestions[currentQuestion].correctAnswer
-                            ? 'green'
-                            : 'red'
-                          : 'white',
-                      '&:hover': {
-                        backgroundColor: 'lightgray',
-                      }
-                    }}
-                    disabled={submitted} // Disable buttons after submission
-                  >
-                    {option}
-                  </Button>
-                ))}
-              </Box>
-              <Box sx={{ marginTop: 4 }}>
-                {feedback === '' ? (
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSubmitAnswer}
-                    disabled={selectedOption === null}
-                  >
-                    Submit Answer
-                  </Button>
-                ) : (
-                  <Box>
-=======
       {showScore ? (
         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '20vh' }}>
-          <Box sx={{ textAlign: 'center', padding: 2, border: '1px solid gray', borderRadius: 3, backgroundColor: '#f5f5f5' }}>
+          <Box sx={{ mt: 21, textAlign: 'center', padding: 2, border: '1px solid gray', borderRadius: 3, backgroundColor: '#f5f5f5' }}>
             <Typography variant="h5" component="div">
               You scored
             </Typography>
             <Typography variant="h3" component="div">
               {score} / {shuffledQuestions.length}
             </Typography>
+            <Container>
+              {isHighScore && (
+                <Typography variant='h6' sx={{ color: 'green' }}>
+                  New high score!
+                </Typography>
+              )}
+              {user ?
+                <Button variant='contained' sx={{ mt: 3 }} component={Link} to="/profile">Check high score</Button>
+                :
+                <Button variant='contained' sx={{ mt: 3 }} onClick={handleSaveScore}>Login to save score</Button>
+              }
+            </Container>
           </Box>
           <Box sx={{ marginTop: 3 }}>
             <Button variant="contained" onClick={restartQuiz}>
@@ -381,7 +327,6 @@ const GuidedTrading = () => {
               ) : (
                 <Box>
                   <Fade in={submitted}>
->>>>>>> main
                     <Typography
                       variant="body1"
                       color={selectedOption === shuffledQuestions[currentQuestion].correctAnswer ? "green" : "red"}

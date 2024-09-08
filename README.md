@@ -34,3 +34,4 @@ Community Quizzes (TBD)
 - `run_prod.py` for hosting
 - `pip freeze > requirements.txt` to save packages for installing
 - `pip install -r requirements.txt` to install all packages
+- Duplicate `.env.dev` and replace `'your_secret_key'` with a generated key

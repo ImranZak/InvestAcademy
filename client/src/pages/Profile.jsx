@@ -6,15 +6,13 @@ import { Container, Typography, CircularProgress } from '@mui/material';
 
 function Profile() {
   const { user } = useContext(UserContext);
-  const [highScore, setHighScore] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     if (user && user.id) {
       http.get(`/users/${user.id}`).then((res) => {
-        setHighScore(res.data.highScore);
-        setUserData(res.data);
+        setUserData(res.data.user);
         setLoading(false);
       }).catch((error) => {
         console.error('Error fetching user data:', error);
@@ -45,7 +43,7 @@ function Profile() {
         <Typography component="span" sx={{ fontWeight: 'bold' }}>Email:</Typography> {userData.email}
       </Typography>
       <Typography variant="body1">
-        <Typography component="span" sx={{ fontWeight: 'bold' }}>High Score:</Typography> {highScore}
+        <Typography component="span" sx={{ fontWeight: 'bold' }}>High Score:</Typography> {userData.highScore}
       </Typography>
     </Container>
   );

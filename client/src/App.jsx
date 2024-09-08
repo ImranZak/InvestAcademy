@@ -10,13 +10,10 @@ import ModuleQuiz from './components/ModuleQuiz';
 import GuidedTrading from './pages/GuidedTrading';
 import RealLifeScenario from './pages/RealLifeScenario';
 import AITradingMode from './pages/AITradingMode';
-<<<<<<< HEAD
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
-=======
 import CaseStudies from './pages/CaseStudies';
->>>>>>> main
 import Dashboard from './pages/Dashboard'; // Ensure you have a Dashboard page
 import { useEffect, useState } from 'react';
 import ErrorBoundary from './ErrorBoundary'; // Import error boundary if needed
@@ -58,19 +55,20 @@ const theme = createTheme({
 function App() {
   const [hasVisited, setHasVisited] = useState(false);
   const [user, setUser] = useState(null);
+  const [updateHighScore, setUpdateHighScore] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem('hasVisited')) {
       setHasVisited(true);
     }
-    if (!user && localStorage.getItem("accessToken")) {
+    if (localStorage.getItem("accessToken")) {
       http.get('/authenticate').then((res) => {
         setUser(res.data.user);
       }).catch((error) => {
         console.error('Error fetching user data:', error);
       });
     }
-  }, [user]);
+  }, []);
 
   const handleChoice = () => {
     localStorage.setItem('hasVisited', 'true');
@@ -78,58 +76,38 @@ function App() {
   };
 
   return (
-<<<<<<< HEAD
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, updateHighScore, setUpdateHighScore }}>
       <ThemeProvider theme={theme}>
         <ErrorBoundary>
-          <Router>
-            <Container>
+          <Router basename="/InvestAcademy">
+            <Container sx={{mt:10}}>
               <Routes>
                 {/* Exclude Navbar for Landing page */}
-                <Route path="/" element={hasVisited ? <Navigate to="/dashboard" /> : <Landing onChoice={handleChoice} />} />
+                <Route path="/" element={hasVisited ? <Navigate to="/homepage" /> : <Landing onChoice={handleChoice} />} />
 
                 {/* Pages with Navbar using Layout */}
                 <Route element={<Layout />}>
+                  <Route path="/homepage" element={<HomePage/>}/>
+                  <Route path="/aboutus" element={<AboutUs/>}/>
                   <Route path="/learning-mode" element={<LearningMode />} />
-                  <Route path="/module-quiz" element={<ModuleQuiz />} />
+                  <Route path="/module-quiz" element={<ModuleQuiz/>}/>
                   <Route path="/guided-trading" element={<GuidedTrading />} />
                   <Route path="/real-life-scenario" element={<RealLifeScenario />} />
                   <Route path="/ai-trading-mode" element={<AITradingMode />} />
+                  <Route path="/casestudies" element={<CaseStudies />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
                   <Route path="/profile" element={<Profile />} />
-                  <Route path="/dashboard" element={<Dashboard />} />
                 </Route>
-=======
-    <ThemeProvider theme={theme}>
-      <ErrorBoundary>
-        <Router basename="/InvestAcademy">
-          <Container sx={{mt:10}}>
-            <Routes>
-              {/* Exclude Navbar for Landing page */}
-              <Route path="/" element={hasVisited ? <Navigate to="/homepage" /> : <Landing onChoice={handleChoice} />} />
 
-              {/* Pages with Navbar using Layout */}
-              <Route element={<Layout />}>
-                <Route path="/homepage" element={<HomePage/>}/>
-                <Route path="/aboutus" element={<AboutUs/>}/>
-                <Route path="/learning-mode" element={<LearningMode />} />
-                <Route path="/module-quiz" element={<ModuleQuiz/>}/>
-                <Route path="/guided-trading" element={<GuidedTrading />} />
-                <Route path="/real-life-scenario" element={<RealLifeScenario />} />
-                <Route path="/ai-trading-mode" element={<AITradingMode />} />
-                <Route path="/casestudies" element={<CaseStudies />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-              </Route>
->>>>>>> main
-
-                {/* Fallback Route */}
-                <Route path="*" element={<Navigate to="/" />} />
-              </Routes>
-            </Container>
-          </Router>
-        </ErrorBoundary>
-      </ThemeProvider>
+                  {/* Fallback Route */}
+                  <Route path="*" element={<Navigate to="/" />} />
+                </Routes>
+              </Container>
+            </Router>
+          </ErrorBoundary>
+        </ThemeProvider>
     </UserContext.Provider>
   );
 }

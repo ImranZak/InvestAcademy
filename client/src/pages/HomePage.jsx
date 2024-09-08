@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Container, Typography, Button, Box, Grid, TextField, IconButton, Card, CardContent, Divider } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
@@ -6,6 +6,9 @@ import Navbar from './Navbar';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Feedback, Star, School } from '@mui/icons-material';
 import HandshakeIcon from '@mui/icons-material/Handshake';
+import { ToastContainer, toast } from 'react-toastify';
+import UserContext from '../contexts/UserContext';
+
 
 const theme = createTheme({
   palette: {
@@ -45,6 +48,15 @@ const useStyles = makeStyles({
 
 const HomePage = () => {
   const classes = useStyles();
+  const { updateHighScore, setUpdateHighScore } = useContext(UserContext);
+
+
+  useEffect(() => {
+    if (updateHighScore) {
+      toast.success("High score updated!");
+      setUpdateHighScore(false);
+    }
+  }, [updateHighScore]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -125,7 +137,7 @@ const HomePage = () => {
 
         {/* Testimonials Section */}
         <Container sx={{ mt: 4 }}>
-          <Typography variant="h4" align="center" gutterBottom sx={{mb:4}}>
+          <Typography variant="h4" align="center" gutterBottom sx={{ mb: 4 }}>
             <strong>What Our Users Say</strong>
           </Typography>
           <Grid container spacing={4}>
@@ -191,6 +203,7 @@ const HomePage = () => {
           </Box>
         </Container>
       </Container>
+      <ToastContainer />
     </ThemeProvider>
   );
 };

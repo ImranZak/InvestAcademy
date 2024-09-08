@@ -21,9 +21,7 @@ function Register() {
             username: yup.string().trim()
                 .min(3, 'Name must be at least 5 characters')
                 .max(50, 'Name must be at most 30 characters')
-                .required('Name is required')
-                .matches(/^[a-zA-Z '-,.]+$/,
-                    "Name only allow letters, spaces and characters: ' - , ."),
+                .required('Name is required'),
             email: yup.string().trim()
                 .email('Enter a valid email')
                 .max(50, 'Email must be at most 50 characters')

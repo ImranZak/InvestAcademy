@@ -3,19 +3,15 @@ import { AppBar, Toolbar, Typography, Button, Box, Avatar, Container } from '@mu
 import { Link, useNavigate } from 'react-router-dom';
 import UserContext from '../contexts/UserContext';
 
-<<<<<<< HEAD
-const Navbar = ({ onDebug }) => {
+const Navbar = ({}) => {
   const { user } = useContext(UserContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const logout = () => {
-    localStorage.clear();
-    window.location = "/";
+  const logout = () => { 
+    localStorage.removeItem('accessToken');
+    window.location = "/InvestAcademy/homepage";
   };
 
-=======
-const Navbar = ({}) => {
->>>>>>> main
   return (
     <AppBar 
       position="fixed"
@@ -34,11 +30,10 @@ const Navbar = ({}) => {
         <Box sx={{ display: 'flex', gap: '1.5rem' }}>
           <Button color="inherit" component={Link} to="/homepage" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Home</Button>
           <Button color="inherit" component={Link} to="/learning-mode" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Course</Button>
-<<<<<<< HEAD
-          <Button color="inherit" component={Link} to="/resources" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Resources</Button>
-          <Button color="inherit" component={Link} to="/leaderboard" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Leaderboard</Button>
-          <Button color="inherit" component={Link} to="/events" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Events</Button>
-          <Button color="inherit" component={Link} to="/community" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Community</Button>
+          <Button color="inherit" component={Link} to="/guided-trading" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Guided Training</Button>
+          <Button color="inherit" component={Link} to="/real-life-scenario" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Real Life Scenario</Button>
+          <Button color="inherit" component={Link} to="/casestudies" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Case Studies </Button>
+          <Button color="inherit" component={Link} to="/aboutus" sx={{ color: '#ffffff', fontWeight: 'bold' }}>About Us</Button>
           { user ? 
             <>
               <Button color="inherit" onClick={logout} sx={{ color: '#ffffff', fontWeight: 'bold' }}>Logout</Button>
@@ -47,12 +42,6 @@ const Navbar = ({}) => {
             :
             <Button color="inherit" component={Link} to="/login" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Login</Button>
           }
-=======
-          <Button color="inherit" component={Link} to="/guided-trading" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Guided Training</Button>
-          <Button color="inherit" component={Link} to="/real-life-scenario" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Real Life Scenario</Button>
-          <Button color="inherit" component={Link} to="/casestudies" sx={{ color: '#ffffff', fontWeight: 'bold' }}>Case Studies </Button>
-          <Button color="inherit" component={Link} to="/aboutus" sx={{ color: '#ffffff', fontWeight: 'bold' }}>About Us</Button>
->>>>>>> main
         </Box>
       </Toolbar>
     </AppBar>

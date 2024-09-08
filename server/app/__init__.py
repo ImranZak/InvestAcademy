@@ -37,7 +37,7 @@ def populate():
 
     # Get all user ids
     response = requests.get(url)
-    users = response.json()
+    users = response.json()['users']
     print(response.status_code)
     print(users)
 
