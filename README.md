@@ -12,21 +12,20 @@ Learning Module
 
 Guided Training
 
-- help users practise their knowledge
-- combination of case studies and graph visualisation
+- multiple-choice quiz to test their knowledge
+- user high score is saved
 
-Real-life scenarios & Random AI Mode
+Real-life scenarios
 
 - real-life scenarios with graph visualisations
-- generate case studies using AI
 - user must decide to buy/sell
-- a mix of real and fake case studies using AI
-- example of a case study: Wall Street Crash happened then the stock prices suddenly change, what do you do in that scenario?
+- feedback is given to help user make better decisions
+  
+Case Studies
 
-Community Quizzes (TBD)
-
-- quiz app where admins can add in questions, pre-set pool of questions
-- then the community can make their own quizzes, but needs to go through regulation
+- user can read up on their own about the company
+- decide to buy or sell
+- detailed feedback on reasoning behind correct answer
 
 ## Important commands
 
