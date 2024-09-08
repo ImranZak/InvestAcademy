@@ -3,14 +3,20 @@ import { Container } from '@mui/material';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Landing from './pages/Landing';
+import HomePage from './pages/HomePage';
+import AboutUs from './pages/AboutUs';
 import LearningMode from './pages/LearningMode';
 import ModuleQuiz from './components/ModuleQuiz';
 import GuidedTrading from './pages/GuidedTrading';
 import RealLifeScenario from './pages/RealLifeScenario';
 import AITradingMode from './pages/AITradingMode';
+<<<<<<< HEAD
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
+=======
+import CaseStudies from './pages/CaseStudies';
+>>>>>>> main
 import Dashboard from './pages/Dashboard'; // Ensure you have a Dashboard page
 import { useEffect, useState } from 'react';
 import ErrorBoundary from './ErrorBoundary'; // Import error boundary if needed
@@ -72,6 +78,7 @@ function App() {
   };
 
   return (
+<<<<<<< HEAD
     <UserContext.Provider value={{ user, setUser }}>
       <ThemeProvider theme={theme}>
         <ErrorBoundary>
@@ -93,6 +100,28 @@ function App() {
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/dashboard" element={<Dashboard />} />
                 </Route>
+=======
+    <ThemeProvider theme={theme}>
+      <ErrorBoundary>
+        <Router basename="/InvestAcademy">
+          <Container sx={{mt:10}}>
+            <Routes>
+              {/* Exclude Navbar for Landing page */}
+              <Route path="/" element={hasVisited ? <Navigate to="/homepage" /> : <Landing onChoice={handleChoice} />} />
+
+              {/* Pages with Navbar using Layout */}
+              <Route element={<Layout />}>
+                <Route path="/homepage" element={<HomePage/>}/>
+                <Route path="/aboutus" element={<AboutUs/>}/>
+                <Route path="/learning-mode" element={<LearningMode />} />
+                <Route path="/module-quiz" element={<ModuleQuiz/>}/>
+                <Route path="/guided-trading" element={<GuidedTrading />} />
+                <Route path="/real-life-scenario" element={<RealLifeScenario />} />
+                <Route path="/ai-trading-mode" element={<AITradingMode />} />
+                <Route path="/casestudies" element={<CaseStudies />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+              </Route>
+>>>>>>> main
 
                 {/* Fallback Route */}
                 <Route path="*" element={<Navigate to="/" />} />

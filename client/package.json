@@ -20,10 +20,15 @@
     "@mui/material": "^5.16.7",
     "@mui/styles": "^6.0.2",
     "axios": "^1.6.8",
+<<<<<<< HEAD
     "cors": "^2.8.5",
+=======
+    "chart.js": "^4.4.4",
+>>>>>>> main
     "dayjs": "^1.11.11",
     "formik": "^2.4.6",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.0",
     "react-toastify": "^10.0.5",
