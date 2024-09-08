@@ -76,5 +76,18 @@ class TestUser(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json['user']['email'], 'test@example.com')
 
+    def test_high_score(self):
+        self.client.post('/users', json={'username': 'testuser', 'email': 'test@example.com', 'password': 'password123'})
+        response = self.client.get('/users/1')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(None, response.json['highScore'])
+        response = self.client.put('/users/1', json={'highScore': 1})       
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'User updated successfully', response.data)
+        response = self.client.get('/users/1')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(1, response.json['highScore'])
+
+
 if __name__ == '__main__':
     unittest.main()

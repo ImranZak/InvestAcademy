@@ -1,8 +1,20 @@
 import React from 'react';
 import { Container, Grid, Card, CardContent, Typography, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Dashboard = () => {
+  const location = useLocation();
+  const headers = location.state?.headers;
+
+  useEffect(() => {
+    const updateHighScore = headers?.updateHighScore ?? false;;
+    if (updateHighScore) {
+      toast.success("High score updated!");
+    }
+  }, [location]); 
+
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
@@ -31,6 +43,7 @@ const Dashboard = () => {
         </Grid>
         {/* Add more cards for other features like AI Trading Mode */}
       </Grid>
+      <ToastContainer />
     </Container>
   );
 };

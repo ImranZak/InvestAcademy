@@ -10,7 +10,7 @@ import UserContext from '../contexts/UserContext';
 
 function Login() {
     const navigate = useNavigate();
-    const { setUser } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
 
     const formik = useFormik({
         initialValues: {
@@ -35,7 +35,20 @@ function Login() {
                     console.log(res.data)
                     localStorage.setItem("accessToken", res.data.token);
                     setUser(res.data.user);
-                    navigate("/");
+                    const highScore = localStorage.getItem("highScore");
+                    if (highScore) {
+                        http.put(`/users/${res.data.user.id}`, { highScore: highScore })
+                        .then((res) => {
+                            console.log(res.data);
+                            localStorage.removeItem("highScore");
+                            navigate('/dashboard', { state: { headers: { updateHighScore: true} } });
+                        })
+                        .catch(function (err) {
+                            console.error(err)
+                            toast.error(`${err.response.data.message}`);
+                        });
+                    }
+                    navigate("/dashboard");
                 })
                 .catch(function (err) {
                     console.error(err)

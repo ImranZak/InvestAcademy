@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Container, Typography, Card, CardContent, Button, Box } from '@mui/material';
 import http from '../http.js'
 import UserContext from '../contexts/UserContext';
@@ -133,6 +133,7 @@ const GuidedTrading = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [score, setScore] = useState(0);
+  const [isHighScore, setIsHighScore] = useState(false);
   const [showScore, setShowScore] = useState(false);
   const [feedback, setFeedback] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -164,15 +165,31 @@ const GuidedTrading = () => {
       setFeedback(''); // Clear feedback for next question
     } else {
       setShowScore(true);
-    }
-    if (user) {
-      http.put(`/high_score/${user.id}`, { 'score': score })
-        .catch(function (err) {
-            console.error(err)
-            toast.error(`${err.response.data.message}`);
-        });
+      if (user) {
+        http.get(`/users/${user.id}`)
+          .then((res) => {
+            console.log(res.data);
+            const highScore = Math.max(res.data.highScore, score);
+            if (highScore === score) {
+              setIsHighScore(true);
+            }
+            http.put(`/users/${user.id}`, { highScore: highScore })
+              .then((res) => {
+                console.log(res.data);
+              })
+              .catch(function (err) {
+                  console.error(err)
+                  toast.error(`${err.response.data.message}`);
+              });
+          })
+          .catch(function (err) {
+              console.error(err)
+              toast.error(`${err.response.data.message}`);
+          });
+      }
     }
   };
+  
   
   const handleSaveScore = () => {
     localStorage.setItem('highScore', score)
@@ -199,8 +216,13 @@ const GuidedTrading = () => {
             <Typography variant="h5">
             You scored {score} out of {shuffledQuestions.length}
             </Typography>
+            {isHighScore && (
+              <Typography variant='h6' sx={{ color: 'green' }}>
+                New high score!
+              </Typography>
+            )}
             { user ? 
-              <Button variant='contained' sx={{ mt: 3 }} component='Link' to="/profile">Check high score</Button>
+              <Button variant='contained' sx={{ mt: 3 }} component={Link} to="/profile">Check high score</Button>
               :
               <Button variant='contained' sx={{ mt: 3 }} onClick={handleSaveScore}>Login to save score</Button>
             }

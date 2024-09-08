@@ -16,7 +16,6 @@ import { useEffect, useState } from 'react';
 import ErrorBoundary from './ErrorBoundary'; // Import error boundary if needed
 import Layout from './Layout'; // Import Layout for pages with Navbar
 import http from './http';
-import { ToastContainer, toast } from 'react-toastify';
 import UserContext from './contexts/UserContext';
 
 const theme = createTheme({
@@ -50,11 +49,6 @@ const theme = createTheme({
   },
 });
 
-
-
-
-
-
 function App() {
   const [hasVisited, setHasVisited] = useState(false);
   const [user, setUser] = useState(null);
@@ -65,9 +59,9 @@ function App() {
     }
     if (!user && localStorage.getItem("accessToken")) {
       http.get('/authenticate').then((res) => {
-        console.log(res.data.user)
         setUser(res.data.user);
-        console.log(user)
+      }).catch((error) => {
+        console.error('Error fetching user data:', error);
       });
     }
   }, [user]);
@@ -81,7 +75,7 @@ function App() {
     <UserContext.Provider value={{ user, setUser }}>
       <ThemeProvider theme={theme}>
         <ErrorBoundary>
-          <Router >
+          <Router>
             <Container>
               <Routes>
                 {/* Exclude Navbar for Landing page */}
@@ -90,8 +84,8 @@ function App() {
                 {/* Pages with Navbar using Layout */}
                 <Route element={<Layout />}>
                   <Route path="/learning-mode" element={<LearningMode />} />
-                  <Route path="/module-quiz" element={<ModuleQuiz/>}/>
-                <Route path="/guided-trading" element={<GuidedTrading />} />
+                  <Route path="/module-quiz" element={<ModuleQuiz />} />
+                  <Route path="/guided-trading" element={<GuidedTrading />} />
                   <Route path="/real-life-scenario" element={<RealLifeScenario />} />
                   <Route path="/ai-trading-mode" element={<AITradingMode />} />
                   <Route path="/login" element={<Login />} />

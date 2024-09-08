@@ -55,7 +55,7 @@ def login():
             'user_id': user.id,
             'exp':  datetime.now() + timedelta(hours=24)
         }, app.config['SECRET_KEY'], algorithm='HS256')
-        return jsonify({'message': 'Login successful', 'username': user.username, 'token': token})
+        return jsonify({'message': 'Login successful', 'user': {'id': user.id, 'email': user.email}, 'token': token})
     return jsonify({'message': 'Invalid email or username'}), 400
 
 
@@ -91,19 +91,11 @@ def get_user(id):
 def update_user(id):
     data = request.get_json()
     user = User.query.get_or_404(id)
-    user.username = data['username']
-    user.email = data['email']
+    user.username = data.get('username', None) or user.username
+    user.email = data.get('email', None) or user.email
+    user.high_score = data.get('highScore', None) or user.high_score
     db.session.commit()
     return jsonify({'message': 'User updated successfully'})
-
-
-@user_bp.route('/high_score/<int:id>', methods=['PUT'])
-def high_score(id):
-    score = request.get_json()['score']
-    user = User.query.get_or_404(id)
-    user.high_score = max(score, user.high_score)
-    db.session.commit()
-    return jsonify({'message': 'User score updated successfully'})
 
 
 @user_bp.route('/users/<int:id>', methods=['DELETE'])
